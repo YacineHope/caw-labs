@@ -1,0 +1,107 @@
+/* Universal and Type selectors */
+
+/* 1 */
+* {
+    font-family: sans-serif;
+    line-height: 1.6;
+}
+
+/* 2 */
+body {
+    background-color: #f4f4f4;
+}
+
+/* 3 */
+h1,h2 {
+    text-align: center;
+    color: #336699;
+}
+
+/* 4 */
+p {
+    margin-bottom: 1em;
+}
+
+/* Class and ID selectors */
+
+/* 1 */
+#special {
+    background-color: #fffacd;
+    padding:10px
+}
+
+/* 2 */
+.hello {
+    color:#28a745;
+    font-weight: bold;
+}
+
+/* Descendant and Child selectors */
+
+/* 1 */
+.main-class>h2, div.ai-tools {
+  transform: uppercase;
+}
+
+/* 2 */
+.ai-tools li {
+  list-style-type: square;
+}
+
+/* 3 */
+div.ai-tools ul {
+    padding-left: 20px;
+}
+
+/* Attribute selectors */
+
+/* 1 */
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+/* 2 */
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Pseudo-classes and Pseudo-elements */
+
+/* 1 */
+a {
+    color:#007bff
+}
+
+/* 2 */
+a:hover {
+    color:rgb(8, 8, 172);
+    text-decoration: none;
+}
+
+/* 3 */
+a:visited {
+    color: #6c757d;
+}
+
+/* 5 (the explanation is on README.md file) */
+input:focus {
+    border: 2px solid blue;
+}
+
+/* Combining Selectors and Specificity Challenge */
+
+/* 1 */
+div.ai-tools li.hello {
+    font-style: italic;
+} 
+
+/* 2 (the explanation is on README.md file) */
+footer h2 {
+    font-size: 1.2em;
+}
+
+h2 {
+    font-size: 2em;
+}
