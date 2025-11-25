@@ -1,0 +1,6 @@
+.box-form { display:flex; gap:12px; align-items:end; flex-wrap:wrap; }
+.box-form label { display:flex; flex-direction:column; font-weight:600; color:#0f172a; }
+.box-form input[type="number"] { padding:6px 8px; border-radius:6px; border:1px solid #e5e7eb; width:120px; }
+.box-form input[type="color"] { width:48px; height:34px; padding:0; border:none; background:transparent; }
+.submit-btn { background:linear-gradient(135deg,#10b981,#06b6d4); color:#fff; border:none; padding:8px 12px; border-radius:6px; font-weight:700; cursor:pointer; }
+.submit-btn:hover { transform:translateY(-2px); }

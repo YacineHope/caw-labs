@@ -1,0 +1,46 @@
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border-left: 4px solid #3b82f6;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-info p {
+  margin: 4px 0;
+  color: #0f172a;
+}
+
+.delete-btn {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+.users-empty {
+  color: #6b7280;
+  padding: 12px;
+  text-align: center;
+}

@@ -1,0 +1,25 @@
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+.btn-row {
+  display: flex;
+  gap: 10px;
+}
+.btn-row button {
+  background: #06b6d4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-row button:hover { opacity: 0.95; }
+.btn-group p {
+  margin: 0;
+  color: #064e3b;
+  font-weight: 600;
+}

@@ -1,0 +1,40 @@
+.exercise2 {
+  padding: 12px;
+}
+.exercise2 section {
+  margin-bottom: 12px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(2,6,23,0.04);
+}
+.exercise2 .hint {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+.arrow-btn {
+  background: linear-gradient(135deg, #3b82f6, #ec4899);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 16px rgba(59,130,246,0.3);
+  transition: all 0.2s ease;
+}
+
+.arrow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(59,130,246,0.4);
+}
+
+.arrow-btn:active {
+  transform: translateY(0);
+}
+
+.back-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #ec4899 100%);
+}

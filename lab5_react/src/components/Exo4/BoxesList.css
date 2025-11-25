@@ -1,0 +1,6 @@
+.boxes-grid { display:flex; flex-wrap:wrap; gap:12px; }
+.box-item { display:flex; flex-direction:column; gap:8px; align-items:center; padding:8px; border-radius:8px; background:#f8fafc; min-width:120px; }
+.box-preview { border-radius:6px; box-shadow:0 6px 12px rgba(2,6,23,0.06); }
+.box-meta { display:flex; gap:8px; align-items:center; }
+.delete-btn { background:#ef4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; font-weight:600; }
+.no-boxes { color:#6b7280; }

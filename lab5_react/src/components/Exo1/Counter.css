@@ -1,0 +1,23 @@
+.counter {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+}
+.counter h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #111827;
+  min-width: 64px;
+  text-align: center;
+}
+.counter button {
+  background: #10b981;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.counter button:last-of-type { background: #ef4444; }

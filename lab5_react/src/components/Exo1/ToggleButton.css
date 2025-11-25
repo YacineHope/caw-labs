@@ -1,0 +1,21 @@
+.toggle {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+}
+.toggle button {
+  background: #f97316;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(249,115,22,0.18);
+}
+.toggle p {
+  margin: 0;
+  color: #7c2d12;
+  font-weight: 600;
+}
