@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WriteFile.js + destination.txt Simulator</title>
+  <style>
+    :root{--bg:#071323;--card:#081827;--muted:#9fb0c8;--accent:#ef7fbf;--success:#7ee787}
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    body{margin:0;height:100vh;background:linear-gradient(180deg,#031126 0%,#071827 100%);color:#e6f3ff}
+    .container{max-width:1100px;margin:28px auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:14px;border-radius:12px}
+    h2{margin:0 0 10px 0;font-size:16px}
+    label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+    textarea, input, pre{width:100%;background:#061528;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:#dff3ff;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    textarea{min-height:160px;resize:vertical}
+    .controls{display:flex;gap:8px;margin-top:8px}
+    .btn{background:var(--accent);border:none;color:#072431;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .console{min-height:120px;background:#021018;padding:12px;border-radius:8px;overflow:auto;border:1px solid rgba(255,255,255,0.02)}
+    .line{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#cfeee9}
+    .err{color:#ffb4b4}
+    .success{color:var(--success)}
+    .left-col{display:flex;flex-direction:column;gap:12px}
+    .right-col{display:flex;flex-direction:column;gap:12px}
+    .meta{font-size:13px;color:var(--muted)}
+    pre.code{max-height:360px;overflow:auto}
+    @media(max-width:980px){.container{grid-template-columns:1fr;padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card left-col">
+      <div>
+        <h2>Simulated File: <strong>destination.txt</strong></h2>
+        <label>Default content (you can edit). This simulates the actual destination file content.</label>
+        <textarea id="destFile">text to be saved to destination file...</textarea>
+        <div class="controls">
+          <button id="download" class="btn ghost">Download destination.txt</button>
+          <button id="reset" class="btn ghost">Reset Default</button>
+        </div>
+      </div>
+
+      <div>
+        <h2>Run simulated Node command</h2>
+        <label>Command form: node WriteFile.js &lt;filename&gt; &lt;text&gt;</label>
+        <input id="filename" value="destination.txt" />
+        <label style="margin-top:6px">Text to write</label>
+        <input id="writeText" placeholder="Enter text to save to file" />
+        <div class="controls">
+          <button id="run" class="btn">Run</button>
+          <button id="clear" class="btn ghost">Clear Console</button>
+        </div>
+      </div>
+
+      <div>
+        <h2>Console</h2>
+        <div id="console" class="console"></div>
+      </div>
+    </div>
+
+    <div class="card right-col">
+      <div>
+        <h2>Source: <strong>WriteFile.js</strong></h2>
+        <label>Preview of the script (read-only). You can copy it.</label>
+        <pre id="code" class="code"><code>const fs = require('fs');
+
+&#47;&#42; First task &#42;&#47;
+&#47;&#42;
+// Get the text from command line arguments
+const text = process.argv[2];
+
+const fileName = "f.txt";
+
+// The lambda function method
+fs.writeFile(fileName, text, (err) => {
+  if (err) {
+    console.error("Error writing file:", err.message);
+    process.exit(1);
+  }
+  console.log("The file has been saved!");
+});
+
+&#42;&#47;
+
+
+
+&#47;&#42;Second task&#42;&#47;
+
+&#47;&#42;
+// Get filename and text from command line arguments
+const fileName = process.argv[2];
+const text = process.argv[3];
+
+if (!fileName || !text) {
+  console.error("Usage: node exo4.js <filename> <text>");
+  process.exit(1);
+}
+
+// Write the text into the specified file
+fs.writeFile(fileName, text, (err) => {
+  if (err) {
+    console.error("Error writing file:", err.message);
+    process.exit(1);
+  }
+  console.log("The file has been saved!");
+});
+
+&#42;&#47;
+
+
+
+&#47;&#42; Third task &#42;&#47;
+
+// Get filename and text from command line arguments
+const fileName = process.argv[2];
+const text = process.argv[3];
+
+if (!fileName || !text) {
+  console.error("Usage: node exo4.js <filename> <text>");
+  process.exit(1);
+}
+
+// Write the text into the specified file
+fs.writeFile(fileName, text, (err) => {
+  if (err) {
+    console.error("Error writing file:", err.message);
+    process.exit(1);
+  }
+  console.log("The file has been saved!");
+
+  // Read and display the contents of the file
+  fs.readFile(fileName, 'utf8', (err, data) => {
+    if (err) {
+      console.error("Error reading file:", err.message);
+      process.exit(1);
+    }
+    console.log(data);
+  });
+});</code></pre>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="copyCode" class="btn ghost">Copy Code</button>
+          <div class="meta">Preview only — runs are simulated in-browser</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const destEl = document.getElementById('destFile');
+    const filenameEl = document.getElementById('filename');
+    const textEl = document.getElementById('writeText');
+    const runBtn = document.getElementById('run');
+    const consoleEl = document.getElementById('console');
+    const clearBtn = document.getElementById('clear');
+    const downloadBtn = document.getElementById('download');
+    const resetBtn = document.getElementById('reset');
+    const copyCodeBtn = document.getElementById('copyCode');
+
+    function append(msg, cls){
+      const d = document.createElement('div'); d.className='line'+(cls?(' '+cls):''); d.textContent=msg; consoleEl.appendChild(d); consoleEl.scrollTop = consoleEl.scrollHeight; }
+
+    runBtn.addEventListener('click', ()=>{
+      consoleEl.innerHTML='';
+      const fileName = filenameEl.value && filenameEl.value.trim();
+      const text = textEl.value;
+      if(!fileName || !text){ append('Usage: node WriteFile.js <filename> <text>', 'err'); return; }
+
+      // Simulate async fs.writeFile
+      append('Writing file: '+fileName+' ...');
+      setTimeout(()=>{
+        // perform the "write"
+        if(fileName === 'destination.txt'){
+          destEl.value = text;
+        }
+        append('The file has been saved!','success');
+
+        // Simulate readFile callback from script
+        setTimeout(()=>{
+          let data = (fileName === 'destination.txt') ? destEl.value : '[simulated file content]';
+          append(data);
+        },120);
+      },180);
+    });
+
+    clearBtn.addEventListener('click', ()=>{ consoleEl.innerHTML=''; });
+
+    downloadBtn.addEventListener('click', ()=>{
+      const blob = new Blob([destEl.value], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='destination.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    resetBtn.addEventListener('click', ()=>{ destEl.value='text to be saved to destination file...'; append('destination.txt reset to default'); });
+
+    copyCodeBtn.addEventListener('click', ()=>{
+      const code = document.getElementById('code').innerText;
+      navigator.clipboard?.writeText(code).then(()=>{ copyCodeBtn.textContent='Copied!'; setTimeout(()=>copyCodeBtn.textContent='Copy Code',900);} ).catch(()=>{ copyCodeBtn.textContent='Failed'; setTimeout(()=>copyCodeBtn.textContent='Copy Code',900);} );
+    });
+  </script>
+</body>
+</html>
