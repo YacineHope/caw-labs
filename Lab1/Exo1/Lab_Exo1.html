@@ -1,31 +1,772 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palestine Information Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: radial-gradient(circle, #f7f1e3 0%, #eddebc 100%);
+            margin: 0;
+            padding: 100px 40px 40px 40px;
+            /* Space for sticky header */
+            color: #2c2c2c;
+            min-height: 100vh;
+            border: 20px solid transparent;
+            border-image: url('https://www.transparenttextures.com/patterns/parchment.png') 30 round;
+        }
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(237, 222, 188, 0.95);
+            /* Semi-transparent parchment color */
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 15px rgba(139, 90, 43, 0.2);
+            z-index: 1000;
+            border-bottom: 2px solid #8b5a2b;
+        }
+
+        .sticky-header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #5d4037;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8b5a2b;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #d4af37;
+            /* Gold on hover */
+        }
+
+        .nav-link.active {
+            color: #5d4037;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .nav-link.active::before {
+            content: '❧';
+            /* Decorative flourish for active link */
+            position: absolute;
+            left: -20px;
+            color: #d4af37;
+        }
+
+        h1 {
+            color: #4a3426;
+            text-transform: uppercase;
+            border-bottom: 2px solid #8b5a2b;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #4a3426;
+            text-transform: uppercase;
+            border-bottom: 2px solid #8b5a2b;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        img {
+            border: 5px solid #fff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            filter: sepia(0.3);
+            /* Slight vintage tone to images */
+            display: block;
+            margin: 0 auto;
+        }
+
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .media-item {
+            width: 100%;
+        }
+
+        .map-section,
+        .flag-section,
+        .quds-section,
+        .area-section,
+        .religion-grid,
+        .ramallah-section,
+        .nablus-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .religion-item {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .religion-item img {
+            width: 350px;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin: 10px 0;
+        }
+
+        .gaza-interactive {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px dashed #8b5a2b;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .gaza-interactive:hover {
+            background: rgba(139, 90, 43, 0.05);
+        }
+
+        .gaza-media {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            /* Adjusted to match portrait images */
+        }
+
+        .gaza-media img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+
+        .gaza-img-after {
+            opacity: 0;
+        }
+
+        .gaza-interactive:hover .gaza-img-after {
+            opacity: 1;
+        }
+
+        .gaza-interactive:hover .gaza-img-before {
+            opacity: 0;
+        }
+
+        .gaza-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+
+        .gaza-content p {
+            display: none;
+        }
+
+        .gaza-content p.active {
+            display: block;
+        }
+
+        .ink-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.35rem;
+            color: #0b1a2e;
+            /* Deep blue ink color */
+            max-width: 500px;
+            text-align: justify;
+            line-height: 1.4;
+            transform: rotate(-0.5deg);
+            /* Slight tilt for handwritten feel */
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            min-height: 100px;
+            /* Adjusted for better layout */
+        }
+
+        .ink-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #5d4037;
+            /* Deep brown historical color */
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: underline;
+        }
+
+        .ink-text::after {
+            content: '|';
+            display: inline-block;
+            margin-left: 2px;
+            color: #1a2a6c;
+            animation: blink 0.8s infinite;
+        }
+
+        .history-stories {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .story-item img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 100px;
+            padding: 50px 0;
+            text-align: center;
+            background: rgba(139, 90, 43, 0.05);
+            /* Very subtle brown tint */
+            border-top: 2px solid #8b5a2b;
+            color: #5d4037;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        footer::before {
+            content: '❧ ❧ ❧';
+            display: block;
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .writing-finished::after {
+            display: none !important;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Subtle ink jitter to make it feel natural on hover */
+        .ink-text:hover {
+            animation: ink-jitter 0.2s infinite;
+        }
+
+        @keyframes ink-jitter {
+            0% {
+                transform: rotate(-0.5deg) translate(0, 0);
+            }
+
+            50% {
+                transform: rotate(-0.55deg) translate(0.5px, 0.5px);
+            }
+
+            100% {
+                transform: rotate(-0.5deg) translate(0, 0);
+            }
+        }
+
+        .circle-img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 3px solid #8b5a2b;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            position: relative;
+            height: auto;
+            min-height: 600px;
+            width: 100%;
+            background: #eddebc url('Palestine Map.webp') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4a3426;
+            overflow: hidden;
+            border-bottom: 5px double #8b5a2b;
+            margin-bottom: 60px;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            background-blend-mode: soft-light;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(237, 222, 188, 0.6) 0%, rgba(200, 180, 140, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            border: 2px solid rgba(139, 90, 43, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #5d4037;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            border-bottom: none;
+            padding-bottom: 0;
+            text-transform: none;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero-desc {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #4a3426;
+            font-style: italic;
+        }
+
+        .hero blockquote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #8b5a2b;
+            margin: 0;
+            position: relative;
+            padding: 20px 40px;
+        }
+
+        .hero blockquote::before {
+            content: '“';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .hero blockquote::after {
+            content: '”';
+            position: absolute;
+            right: 0;
+            bottom: -30px;
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+
+        .map-lines-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .dashed-line {
+            fill: none;
+            stroke: #8b5a2b;
+            stroke-width: 2;
+            stroke-dasharray: 8, 5;
+            opacity: 0.6;
+            animation: dashDraw 10s linear infinite;
+        }
+
+        @keyframes dashDraw {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+
+        .location-dot {
+            fill: #d4af37;
+            stroke: #8b5a2b;
+            stroke-width: 1;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>State of Palestine</h1>
+    <header class="sticky-header">
+        <h1>State of Palestine</h1>
+        <nav class="nav-menu">
+            <a href="#map-section" class="nav-link">Map</a>
+            <a href="#flag-section" class="nav-link">Flag</a>
+            <a href="#info-section" class="nav-link">Key Info</a>
+            <a href="#history-section" class="nav-link">Brief History</a>
+        </nav>
+    </header>
 
-    <h2>Map</h2>
-    <img src="C:\Users\user\OneDrive\Bureau\My Files\Palestine Map.webp" alt="Palestinian Map" width="400px" height="450px" >
+    <section class="hero">
+        <svg class="map-lines-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+            <!-- Decorative dashed lines connecting cities -->
+            <!-- Gaza to Al-Quds -->
+            <path class="dashed-line" d="M150,450 Q250,350 400,300" />
+            <!-- Al-Quds to Ramallah -->
+            <path class="dashed-line" d="M400,300 Q420,250 450,220" />
+            <!-- Ramallah to Nablus -->
+            <path class="dashed-line" d="M450,220 Q480,150 500,100" />
 
-    <h2>Flag</h2>
-    <img src="C:\Users\user\OneDrive\Bureau\My Files\Palestine Flag.jpg" alt="Palestinian Flag" height="250px" width="500px">
+            <!-- Location Dots -->
+            <circle class="location-dot" cx="150" cy="450" r="6" /> <!-- Gaza -->
+            <circle class="location-dot" cx="400" cy="300" r="6" /> <!-- Al-Quds -->
+            <circle class="location-dot" cx="450" cy="220" r="6" /> <!-- Ramallah -->
+            <circle class="location-dot" cx="500" cy="100" r="6" /> <!-- Nablus -->
 
-    <h2>Key Informations</h2>
-        <ul>
-            <li>Capital: Al-Quds</li>
-            <li>Area: 27.027 km2</li>
-            <li>Religion: Islam(predominant) & Christianity.</li>
-            <li>Main cities: Al-Quds, Gaza, Ramallah, Nablus</li>
-        </ul>
+            <!-- City Labels -->
+            <text x="130" y="475" font-family="'Georgia', serif" font-size="20" fill="#5d4037"
+                font-weight="bold">Gaza</text>
+            <text x="360" y="330" font-family="'Georgia', serif" font-size="20" fill="#5d4037"
+                font-weight="bold">Al-Quds</text>
+            <text x="470" y="240" font-family="'Georgia', serif" font-size="20" fill="#5d4037"
+                font-weight="bold">Ramallah</text>
+            <text x="520" y="110" font-family="'Georgia', serif" font-size="20" fill="#5d4037"
+                font-weight="bold">Nablus</text>
+        </svg>
+        <div class="hero-content">
+            <h1 id="heroTitle"></h1>
+            <p id="heroDescription" class="hero-desc"></p>
+            <blockquote id="heroQuote"></blockquote>
+        </div>
+    </section>
 
-    <h2 id="point1">Brief History</h2>
+    <div class="media-container">
+        <div id="map-section" class="media-item">
+            <h2>Map</h2>
+            <div class="map-section">
+                <img src="Palestine Map.webp" alt="Palestinian Map"
+                    style="width: 100%; height: auto; max-width: 400px; margin: 0;">
+                <p id="mapDescription" class="ink-text"></p>
+            </div>
+        </div>
 
-    <p>Hind's <strong><em>Call!</em></strong></p>
-    <p><em>The Soul of the Soul</em></p>
-    <p>Breaking the siege with the peacefull <b>Flotilla</b></p>
+        <div id="flag-section" class="media-item">
+            <h2>Flag</h2>
+            <div class="flag-section">
+                <p id="flagDescription" class="ink-text"></p>
+                <img src="Palestine Flag.jpg" alt="Palestinian Flag"
+                    style="width: 100%; height: auto; max-width: 500px; margin: 0;">
+            </div>
+        </div>
+    </div>
 
+    <h2 id="info-section">Key Informations</h2>
+    <ul>
+        <li>
+            Capital: Al-Quds
+            <div class="quds-section">
+                <img src="al_quds.jpg" alt="Al-Quds" class="circle-img">
+                <p id="qudsDescription" class="ink-text"></p>
+            </div>
+        </li>
+        <li>
+            Area: 27.027 km2
+            <div class="area-section">
+                <img src="palestine_transformation.png" alt="Palestine Transformation"
+                    style="width: 50%; height: auto; max-width: 600px; margin: 10px 0;">
+                <p id="areaDescription" class="ink-text"></p>
+            </div>
+        </li>
+        <li>
+            Religion: Islam(predominant) & Christianity.
+            <div class="religion-grid">
+                <div class="religion-item">
+                    <img src="islam.jpg" alt="Islam in Palestine">
+                    <p id="islamDescription" class="ink-text"></p>
+                </div>
+                <div class="religion-item">
+                    <img src="christianity.jpg" alt="Christianity in Palestine">
+                    <p id="christianDescription" class="ink-text"></p>
+                </div>
+            </div>
+        </li>
+        <li>
+            Main cities: Al-Quds, Gaza, Ramallah, Nablus
+            <div id="gazaContainer" class="gaza-interactive">
+                <div class="gaza-media">
+                    <img src="gaza_before.jpg" alt="Gaza Before" class="gaza-img-before">
+                    <img src="gaza_after.jpg" alt="Gaza After" class="gaza-img-after">
+                </div>
+                <div class="gaza-content">
+                    <p id="gazaBeforeDesc" class="ink-text active"></p>
+                    <p id="gazaAfterDesc" class="ink-text"></p>
+                </div>
+            </div>
+            <div id="ramallahContainer" class="ramallah-section" style="margin-top: 40px;">
+                <p id="ramallahDescription" class="ink-text"></p>
+                <img src="Ramallah.webp" alt="Ramallah" style="width: 100%; height: auto; max-width: 400px; margin: 0;">
+            </div>
+            <div id="nablusContainer" class="nablus-section" style="margin-top: 40px;">
+                <img src="nablus.jpg" alt="Nablus" style="width: 100%; height: auto; max-width: 400px; margin: 0;">
+                <p id="nablusDescription" class="ink-text"></p>
+            </div>
+        </li>
+    </ul>
+
+    <h2 id="history-section">Brief History</h2>
+
+    <div class="history-stories">
+        <!-- Story 1: Hind's Call -->
+        <div class="story-item">
+            <img src="HindsCall.png" alt="Hind's Call">
+            <p id="hindStory" class="ink-text"></p>
+        </div>
+
+        <!-- Story 2: Soul of my Soul -->
+        <div class="story-item">
+            <img src="SoulOfMySoul.webp" alt="The Soul of my Soul">
+            <p id="soulStory" class="ink-text"></p>
+        </div>
+
+        <!-- Story 3: Peaceful Flotilla -->
+        <div class="story-item">
+            <img src="SumudFlotilla.webp" alt="Breaking the Siege">
+            <p id="flotillaStory" class="ink-text"></p>
+        </div>
+    </div>
+
+    <footer id="footer">
+        &copy; Palestine Card Info 2026, All rights reserved
+    </footer>
+
+    <script>
+        const content = [
+            {
+                id: 'heroTitle',
+                text: 'Welcome to Palestine Card Information'
+            },
+            {
+                id: 'heroDescription',
+                text: 'Discover the rich tapestry of history, culture, and enduring spirit that defines the land of Palestine. Journey through ancient cities, sacred landmarks, and the stories of resilience that have shaped this historic crossroads of civilizations.'
+            },
+            {
+                id: 'heroQuote',
+                text: 'Let begin to read the correct events in history !'
+            },
+            {
+                id: 'mapDescription',
+                text: `The map titled "Palestine 1878–1927" defines the region as a diverse land between the Mediterranean Sea and the Jordan River, showing a dense spread of Palestinian villages and towns alongside the gradual emergence of Zionist settlements. It visually captures the demographic and political shifts from late Ottoman rule to the British Mandate, marking key developments like the first Zionist settlement in 1878 and the expansion of mixed and major Zionist towns. Through its symbols and layout, the map reflects how Palestine’s identity and landscape evolved during this pivotal historical period.`
+            },
+            {
+                id: 'flagDescription',
+                text: `The Palestinian flag combines four Pan-Arab colors, each carrying deep historical and symbolic meaning: the red triangle represents sacrifice, courage, and the Arab Revolt; the black stripe recalls the Abbasid Caliphate and resilience through struggle; the white stripe reflects the Umayyad Caliphate, purity, and hope for peace; and the green stripe honors the Fatimid Caliphate, symbolizing Islam, fertility, and renewal. Together, these colors embody Palestinian identity, unity, and the enduring spirit of liberation.`
+            },
+            {
+                id: 'qudsDescription',
+                text: `<span class="ink-title">Al-Quds:</span> Al-Quds, known internationally as Jerusalem, is regarded as the capital of Palestine and holds immense historical, cultural, and spiritual significance. It is one of the oldest cities in the world, sacred to Islam, Christianity, and Judaism, and home to landmarks such as Al-Aqsa Mosque, the Dome of the Rock, and the Church of the Holy Sepulchre. The city symbolizes Palestinian identity and resilience, reflecting its central role in faith and heritage.`
+            },
+            {
+                id: 'areaDescription',
+                text: `<span class="ink-title">Territorial Transformation:</span> This image presents four maps showing the dramatic transformation of Palestinian land from 1947 to 2005. Initially, in 1947, nearly all the territory is marked as Palestinian (green), with sparse Jewish settlements (white). The UN Partition Plan of 1947 proposes a division, introducing significant white areas for a future Israeli state. By 1949–1967, Israeli territory expands sharply, reducing Palestinian land to fragmented zones. In the 2005 map, Palestinian areas appear as isolated patches, highlighting the extent of territorial loss and fragmentation over time due to occupation and settlement expansion.`
+            },
+            {
+                id: 'islamDescription',
+                text: `<span class="ink-title">Islam:</span> Islam is the dominant religion in Palestine, deeply woven into its cultural and historical identity. The vast majority of Palestinians—about 85% in the West Bank and 99% in Gaza—are Sunni Muslims. Islam first arrived in the region in the 7th century during the Rashidun Caliphate, when Caliph Umar ibn al-Khattāb peacefully entered Jerusalem, marking the beginning of Islamic rule. Since then, Islamic traditions, architecture, and values have shaped daily life, with sacred sites like Al-Aqsa Mosque in Jerusalem standing as powerful symbols of faith and resilience.`
+            },
+            {
+                id: 'christianDescription',
+                text: `<span class="ink-title">Christianity:</span> Christianity in Palestine is one of the oldest traditions in the region, tracing its roots back to the prophet Jesus peace be upon him, who was born in Bethlehem. Although Christians today make up a small minority of the population, they maintain a vibrant presence, especially in cities like Bethlehem, Ramallah, and Jerusalem. The land is home to many sacred Christian sites, including the Church of the Nativity and the Church of the Holy Sepulchre, making it a spiritual center for millions around the world.`
+            },
+            {
+                id: 'gazaBeforeDesc',
+                text: `<span class="ink-title">Gaza:</span> Historically, Gaza was a thriving trade hub, dating back over 5,000 years. It was part of ancient Philistia and later ruled by Egyptians, Assyrians, Persians, Greeks, Romans, and Ottomans. Its strategic location along the Mediterranean made it a crossroads for commerce and culture. Under Ottoman and then British control, Gaza remained a modest urban center with strong agricultural traditions and religious significance.`
+            },
+            {
+                id: 'gazaAfterDesc',
+                text: `<span class="ink-title">Gaza (Modern):</span> In modern times, especially after the 1948 Arab-Israeli War, Gaza came under Egyptian administration until Israel occupied it in 1967 following the Six-Day War. After the 2005 Israeli withdrawal, Hamas took control in 2007, leading to repeated military conflicts with Israel. The most recent war in October 2023 saw unprecedented destruction, with thousands of casualties and widespread displacement. Today, Gaza faces humanitarian crises, political isolation, and ongoing reconstruction efforts, while remaining central to Palestinian identity and resistance.`
+            },
+            {
+                id: 'ramallahDescription',
+                text: `<span class="ink-title">Ramallah:</span> Ramallah is a central Palestinian city in the West Bank, known for its cultural vibrancy and political role as the administrative capital of the Palestinian Authority. Founded in the 16th century by Christian families, it grew into a diverse urban center with historic churches, schools, and markets. Today, it blends tradition with modern life, hosting government offices, universities, and cultural events that reflect Palestinian resilience and creativity.`
+            },
+            {
+                id: 'nablusDescription',
+                text: `<span class="ink-title">Nablus:</span> Nablus is a historic Palestinian city in the northern West Bank, nestled between Mount Gerizim and Mount Ebal. Known since ancient times as Shechem, it has been a center of trade, culture, and religion for thousands of years. Today, Nablus is famous for its bustling markets, traditional soap-making, and sweet delicacies like kanafeh. Despite political challenges, it remains a vibrant hub of Palestinian heritage and resilience.`
+            },
+            {
+                id: 'hindStory',
+                text: `<span class="ink-title">Hind’s call!</span> Hind’s call refers to the desperate phone plea of five‑year‑old Hind Rajab during the Gaza war in January 2024, after her family was killed. She begged rescuers to save her while trapped in a car surrounded by bodies. Tragically, Hind and the paramedics sent to help her were later found dead, and her call became a powerful symbol of the suffering of Palestinian civilians and the vulnerability of children in conflict.`
+            },
+            {
+                id: 'soulStory',
+                text: `<span class="ink-title">The Soul of my Soul !</span> Khaled Nabhan, a Palestinian grandfather from Gaza, became a symbol of love and loss when he called his granddaughter Reem “the soul of my soul” after she was killed in an Israeli airstrike in 2023. His emotional farewell, captured in a viral video, deeply moved people worldwide. A month later, Khaled himself was killed in another strike, and his words continue to echo as a powerful reminder of the human cost of war and the enduring bond between family and homeland.`
+            },
+            {
+                id: 'flotillaStory',
+                text: `<span class="ink-title">Breaking the siege with the peacefull Flotilla</span> The peaceful flotilla movement was an international effort to break the blockade on Gaza by sending ships carrying activists and humanitarian aid. Beginning in 2008 and gaining global attention with the 2010 Gaza Freedom Flotilla, these voyages aimed to challenge the siege through nonviolent resistance and solidarity. Though many ships were intercepted by Israeli forces, the flotillas highlighted the humanitarian crisis in Gaza and symbolized global calls for justice, freedom of movement, and dignity for Palestinians.`
+            }
+        ];
+
+        function typeWriter(elementId, text, speedMultiplier = 2) {
+            const container = document.getElementById(elementId);
+            if (container.dataset.writing === 'true' || container.dataset.finished === 'true') return;
+
+            container.dataset.writing = 'true';
+            container.innerHTML = "";
+            let index = 0;
+            let currentHTML = "";
+
+            function write() {
+                if (index < text.length) {
+                    if (text.charAt(index) === '<') {
+                        // Find the end of the tag
+                        const tagEnd = text.indexOf('>', index);
+                        if (tagEnd !== -1) {
+                            currentHTML += text.substring(index, tagEnd + 1);
+                            index = tagEnd + 1;
+                            container.innerHTML = currentHTML;
+                            // Immediately call write again for tags to keep the flow smooth
+                            write();
+                            return;
+                        }
+                    }
+
+                    currentHTML += text.charAt(index);
+                    container.innerHTML = currentHTML;
+                    index++;
+                    const delay = (Math.random() * 40 + 20) / speedMultiplier;
+                    setTimeout(write, delay);
+                } else {
+                    container.classList.add('writing-finished');
+                    container.dataset.writing = 'false';
+                    container.dataset.finished = 'true';
+                }
+            }
+            write();
+        }
+
+        // Intersection Observer for active navigation links
+        const observerOptions = {
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('#map-section, #flag-section, #info-section, #history-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize hover logic for Gaza
+        const gazaContainer = document.getElementById('gazaContainer');
+        const beforeP = document.getElementById('gazaBeforeDesc');
+        const afterP = document.getElementById('gazaAfterDesc');
+        let gazaAfterTriggered = false;
+
+        gazaContainer.addEventListener('mouseenter', () => {
+            beforeP.classList.remove('active');
+            afterP.classList.add('active');
+            if (!gazaAfterTriggered) {
+                const afterData = content.find(c => c.id === 'gazaAfterDesc');
+                typeWriter('gazaAfterDesc', afterData.text);
+                gazaAfterTriggered = true;
+            }
+        });
+
+        gazaContainer.addEventListener('mouseleave', () => {
+            afterP.classList.remove('active');
+            beforeP.classList.add('active');
+        });
+
+        // Start all writing animations after a short delay
+        window.onload = () => {
+            setTimeout(() => {
+                // Initialize all EXCEPT the after-hover text
+                content.forEach(item => {
+                    if (item.id !== 'gazaAfterDesc') {
+                        typeWriter(item.id, item.text);
+                    }
+                });
+            }, 1200);
+        };
+    </script>
 </body>
+
 </html>

@@ -1,42 +1,1272 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gaza Genocide - Awareness</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 15%, #ffffff 40%, #ffffff 60%, #007a3d 85%, #004d26 100%) fixed;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: slideAnimation 20s infinite;
+        }
+
+        .slide:nth-child(1) {
+            background-image: url('image1.jpeg');
+            animation-delay: 0s;
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('image2.jpg');
+            animation-delay: 5s;
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('image3.webp');
+            animation-delay: 10s;
+        }
+
+        .slide:nth-child(4) {
+            background-image: url('image4.png');
+            animation-delay: 15s;
+        }
+
+        @keyframes slideAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            30% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bloody-title {
+            font-size: 5rem;
+            color: #8B0000;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #000, 0 0 10px #ff0000, 0 0 20px #8B0000;
+            letter-spacing: 5px;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-style: italic;
+            color: #dcdcdc;
+        }
+
+        .hero-desc {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .hero-desc b {
+            color: #ff4d4d;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .highlight-red {
+            color: #ff0000;
+            font-weight: 900;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Hero Navigation */
+        .hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .hero-nav:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .hero-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .hero-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8B0000;
+            transition: width 0.3s;
+        }
+
+        .hero-nav a:hover {
+            color: #ff4d4d;
+        }
+
+        .hero-nav a:hover::after,
+        .hero-nav a.active::after {
+            width: 100%;
+        }
+
+        .hero-nav a.active {
+            color: #ff4d4d;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .mouse::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            animation: mouseWheel 2s infinite;
+        }
+
+        .scroll-text {
+            color: white;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes mouseWheel {
+            0% {
+                top: 10px;
+                opacity: 1;
+            }
+
+            80% {
+                top: 30px;
+                opacity: 0;
+            }
+
+            100% {
+                top: 30px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Container for content */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border-top: 15px solid #EE2A35;
+            position: relative;
+        }
+
+        h1#top {
+            color: #8B0000;
+            border-bottom: 2px solid #8B0000;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .stats-box {
+            background: #fdeaea;
+            border-left: 10px solid #8B0000;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+            min-height: 200px;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2c2c2c;
+            display: inline-block;
+        }
+
+        .typing-text b {
+            color: #8B0000;
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2rem;
+            background-color: #8B0000;
+            margin-left: 2px;
+            animation: blink-cursor 0.7s infinite;
+            vertical-align: middle;
+        }
+
+        /* Healthcare Section Styles */
+        .healthcare-flex {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 8px solid #8B0000;
+        }
+
+        .healthcare-text {
+            flex: 1.5;
+        }
+
+        .healthcare-text h2 {
+            color: #8B0000;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .healthcare-img-container {
+            flex: 1;
+        }
+
+        .healthcare-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .healthcare-img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+
+            .healthcare-flex,
+            .education-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .education-flex {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-right: 8px solid #8B0000;
+        }
+
+        .education-text {
+            flex: 1.5;
+        }
+
+        .education-text h2 {
+            color: #8B0000;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .education-img-container {
+            flex: 1;
+        }
+
+        .education-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .education-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Infrastructure Section Styles */
+        .infrastructure-container {
+            margin: 50px 0;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 8px solid #333;
+        }
+
+        .infrastructure-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .infrastructure-text {
+            flex: 1;
+        }
+
+        .infrastructure-text h2 {
+            color: #8B0000;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            font-weight: 900;
+        }
+
+        .curve-container {
+            flex: 1.2;
+            position: relative;
+            background: #fdf2f2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .curve-svg {
+            width: 100%;
+            height: 250px;
+            overflow: visible;
+        }
+
+        .curve-line {
+            fill: none;
+            stroke: #8B0000;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 3s ease-out;
+        }
+
+        .curve-area {
+            fill: #8B0000;
+            opacity: 0;
+            transition: opacity 1s 2.5s;
+        }
+
+        .data-point {
+            position: absolute;
+            background: #fff;
+            border: 2px solid #8B0000;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #8B0000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        @media (max-width: 768px) {
+            .infrastructure-content {
+                flex-direction: column;
+            }
+        }
+
+        @keyframes blink-cursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+            justify-content: center;
+        }
+
+        .chart-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            min-width: 380px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+
+        .chart-card h3 {
+            color: #8B0000;
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 900;
+        }
+
+        /* Enhanced Pie Chart */
+        .pie-chart {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background: conic-gradient(#8B0000 0% 54%,
+                    /* Men */
+                    #ff4d4d 54% 82%,
+                    /* Children */
+                    #333 82% 100%
+                    /* Women */
+                );
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pie-chart::after {
+            content: "Martyrs Demographics";
+            position: absolute;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.7);
+            bottom: 40px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .chart-legend {
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .color-box {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+        }
+
+        /* Enhanced Bar Chart */
+        .bar-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 350px;
+            /* Increased Height */
+            gap: 30px;
+            padding: 40px 10px 20px;
+            border-bottom: 3px solid #8B0000;
+            background: linear-gradient(to bottom, transparent 95%, rgba(139, 0, 0, 0.05) 100%);
+            position: relative;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .bar {
+            width: 70px;
+            /* Wider Bars */
+            background: #8B0000;
+            border-radius: 8px 8px 0 0;
+            transition: height 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 0;
+            position: relative;
+            box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bar-count {
+            position: absolute;
+            top: -35px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #8B0000;
+            opacity: 0;
+            transition: opacity 0.5s 1.5s;
+            white-space: nowrap;
+        }
+
+        .bar-label {
+            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        /* Victims Infographic Grid */
+        .other-victims-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .victim-stat {
+            background: #fdf2f2;
+            padding: 20px 10px;
+            border-radius: 12px;
+            border-bottom: 4px solid #8B0000;
+            transition: transform 0.3s;
+        }
+
+        .victim-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .victim-stat .count {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #8B0000;
+            margin-bottom: 5px;
+        }
+
+        .victim-stat .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        img.main-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .links-section {
+            margin-top: 50px;
+            padding: 40px;
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .links-section h1 {
+            color: #8B0000;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .links-section ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .links-section li {
+            margin-bottom: 0;
+        }
+
+        .links-section a {
+            color: #8B0000;
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: block;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+
+        .links-section a:hover {
+            background: #8B0000;
+            color: white;
+            border-color: #8B0000;
+            transform: scale(1.05);
+        }
+
+        .go-top {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #8B0000;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .go-top:hover {
+            background: #ff0000;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .chart-card {
+                min-width: 100%;
+            }
+
+            .bloody-title {
+                font-size: 3rem;
+            }
+
+            .bar {
+                width: 45px;
+            }
+
+            .bar-count {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+            visibility: hidden;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            border-top: 2px solid #333;
+        }
+
+        /* Solidarity Expression Styles */
+        .solidarity-wrapper {
+            margin-top: 50px;
+            text-align: center;
+            padding: 40px 20px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            border: 2px dashed #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .solidarity-text {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.4;
+        }
+
+        .s-red {
+            color: #ff0000;
+        }
+
+        .s-green {
+            color: #008000;
+        }
+
+        .s-white {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .s-black {
+            color: #555;
+        }
+
+        /* Dark gray for visibility on blackbg */
+
+        .watermelon-icon {
+            font-size: 4rem;
+            animation: watermelonPulse 2s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes watermelonPulse {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0px #ff0000);
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px #008000);
+            }
+
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0px #ff0000);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .solidarity-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1 id="top">Main Content</h1>
-      <p>The main content is talking about Gaza genocide, in Gaza there is 1300000 citizens, over quarter of them are martyrs or got injured since october 7th, the statistics of the victims are as the following: <b>64232 martyrs, 9500 not found, 161583 injured.<br>
-         here is the classifications of the martyrs : 
-         - children: 30.2%
-         - women: 15.8%
-         - elderly: 7.3% 
-         - men: 46.7%</b>
-        </p>
-        <img src="file:///C:/Users/user/OneDrive/Bureau/My%20Files/Palestine%20Map.webp" alt="Image is not not found" width="400px" height="450px">
-        <p>
-          healthcare system is collapsing, there is no fuel for the ambulances, hospitals are running out of supplies, and there is no electricity to power the hospitals machines.<br>
-          Here is some information about the current situation in the healthcare system:
-          - 120 health facilities have been damaged since October 7th, including 38 hospitals and 96 clinics, 147 ambulances and 55 civil defense vehicles.
-          - education system is also collapsing, 156 schools  and universities have been completely destroyed, and 382 of them partially damaged.
-      </p>
-      <p>
-          Building and infrastructure:  210,000 housing units have been destroyed or severely damaged, 180,000 more are partially damaged. 110,000 buildings in Gaza are no longer habitable.
-      </p>
 
-       <video width="500" height="360" controls>
-            <source src="https://www.youtube.com/watch?v=U1f4k8k7rXo" type="video/mp4">
-           our browser does not support the video tag.
-       </video>
-
-    <h1>Links & Resources</h1>
+<body id="hero">
+    <nav class="hero-nav">
         <ul>
-            <li><a href="https://alqassam.ps/">The hero of the resistance</a></li>
-            <li><a href="../Exo1/Lab_Exo1.html">Palestine ID Card</a></li>
-            <li><a href="https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death" target="_blank">The global burden of disease</a></li>
-            <li><a href="https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death">WHO - The global burden of disease</a></li>
-            <li><a href="../Exo1/Lab_Exo1.html#point1">Brief History of Palestine</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#awarenessSection">Awareness</a></li>
+            <li><a href="#healthcareSection">Healthcare</a></li>
+            <li><a href="#educationSection">Education</a></li>
+            <li><a href="#infraSection">Infrastructure</a></li>
+            <li><a href="#linksSection">Resources</a></li>
         </ul>
+    </nav>
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="bloody-title">Gaza Genocide</h1>
+            <p class="hero-subtitle">Palestine <span class="highlight-red">is our cause</span></p>
+            <p class="hero-desc">
+                Take a deep breath, <b>Face</b> the <b>oppressor</b>, <br>
+                and Say as louder as you can: <br>
+                <span class="bloody-title" style="font-size: 3rem; display: block; margin-top: 10px;">"Free
+                    Palestine!"</span>
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span class="scroll-text">Scroll to see the details</span>
+        </div>
+    </section>
 
-        <a href="#top">Go to top</a>
+    <div class="container">
+        <div id="awarenessSection">
+            <h1 id="top">Critical Awareness & Statistics</h1>
+
+            <div id="statsSection" class="stats-box reveal">
+                <div id="typewriterContainer" class="typing-text"></div>
+                <span class="cursor" id="typewriterCursor"></span>
+            </div>
+
+            <section id="chartsSection" class="charts-section reveal">
+                <div class="chart-card">
+                    <h3>Martyrs Demographics</h3>
+                    <div class="pie-chart"></div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="color-box" style="background: #8B0000;"></div> <span>Men (54%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background: #ff4d4d;"></div> <span>Children (28%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background: #333;"></div> <span>Women (18%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="border: 1px dashed #777;"></div> <span>TOTAL: 71,267</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Scale of Human Toll</h3>
+                    <div class="bar-container">
+                        <div class="bar-wrapper">
+                            <span class="bar-count" id="count-injured">171,222</span>
+                            <div class="bar" id="bar-injured" style="background: #ff4d4d;"></div>
+                            <span class="bar-label">Injured</span>
+                        </div>
+                        <div class="bar-wrapper">
+                            <span class="bar-count" id="count-martyrs">71,267</span>
+                            <div class="bar" id="bar-martyrs" style="background: #8B0000;"></div>
+                            <span class="bar-label">Martyrs</span>
+                        </div>
+                        <div class="bar-wrapper">
+                            <span class="bar-count" id="count-missing">9,500</span>
+                            <div class="bar" id="bar-missing" style="background: #333;"></div>
+                            <span class="bar-label">Missing</span>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top: 25px; font-size: 0.95rem; color: #555; background: #eee; padding: 10px; border-radius: 5px;">
+                        Confirmed Statistics (cumulative since Oct 2023)
+                    </div>
+                </div>
+
+                <div class="chart-card" style="width: 100%; flex-basis: 100%;">
+                    <h3>Targeted Professionals & Volunteers</h3>
+                    <div class="other-victims-grid">
+                        <div class="victim-stat"><span class="count">1,701</span><span class="label">Medical
+                                Personnel</span></div>
+                        <div class="victim-stat"><span class="count">257</span><span class="label">Journalists</span>
+                        </div>
+                        <div class="victim-stat"><span class="count">224+</span><span class="label">Aid Workers</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="healthcareSection" class="healthcare-flex reveal">
+            <div class="healthcare-text">
+                <h2>The Collapse of Care</h2>
+                <p>
+                    The healthcare system in Gaza is on the brink of collapse. Since October 7th, 120 health facilities
+                    have been damaged, including 38 hospitals and 96 clinics, while 147 ambulances and 55 civil defense
+                    vehicles have been destroyed. With no fuel to run ambulances, hospitals struggling without
+                    electricity, and medical supplies running out, doctors are forced to treat patients in dire
+                    conditions. This has left thousands of wounded without proper care, turning hospitals into
+                    overcrowded shelters rather than functioning medical centers, and making even basic treatment nearly
+                    impossible.
+                </p>
+            </div>
+            <div class="healthcare-img-container">
+                <img src="image5.jpg" alt="Healthcare system in Gaza" class="healthcare-img">
+            </div>
+        </div>
+
+        <div id="educationSection" class="education-flex reveal">
+            <div class="education-img-container">
+                <img src="image6.webp" alt="Education system in Gaza" class="education-img">
+            </div>
+            <div class="education-text">
+                <h2>The Silencing of Schools</h2>
+                <p>
+                    The education system in Gaza is collapsing under the weight of war and destruction. Since October
+                    7th, 156 schools and universities have been completely destroyed, and 382 more partially damaged,
+                    leaving hundreds of thousands of students without safe classrooms. With infrastructure ruined,
+                    teachers displaced, and resources scarce, learning has been forced to stop or move into overcrowded
+                    shelters. What was once a vibrant system nurturing future generations is now struggling to survive
+                    amid devastation.
+                </p>
+            </div>
+        </div>
+
+        <div id="infraSection" class="infrastructure-container reveal">
+            <div class="infrastructure-content">
+                <div class="infrastructure-text">
+                    <h2>Infrastructure Devastation</h2>
+                    <p>
+                        The destruction of Gaza’s infrastructure is staggering. Since October 7th, 210,000 housing units
+                        have been destroyed or severely damaged, with another 180,000 partially damaged, leaving 110,000
+                        buildings completely uninhabitable. This scale of devastation has displaced hundreds of
+                        thousands of families, forcing many to live in overcrowded shelters or makeshift tents. Beyond
+                        homes, the collapse of infrastructure has crippled daily life—water, electricity, and
+                        sanitation systems are barely functioning, and entire neighborhoods have been reduced to rubble.
+                        These statistics reflect not only the physical loss of buildings but also the erasure of
+                        communities and the deep humanitarian crisis facing Gaza’s population.
+                    </p>
+                </div>
+                <div class="curve-container">
+                    <svg viewBox="0 0 400 200" class="curve-svg" id="destructionCurve">
+                        <!-- Background Area -->
+                        <path d="M 0 200 Q 100 180, 200 100 T 400 0 L 400 200 Z" class="curve-area" id="curveArea" />
+                        <!-- Main Curve Line -->
+                        <path d="M 0 200 Q 100 180, 200 100 T 400 0" class="curve-line" id="curvePath" />
+                    </svg>
+                    <!-- Floating Data Points -->
+                    <div class="data-point" style="bottom: 5%; left: 0%;" id="point1">Start (Oct 7)</div>
+                    <div class="data-point" style="bottom: 50%; left: 45%;" id="point2">180K Damaged</div>
+                    <div class="data-point" style="top: -10%; right: -5%;" id="point3">210K Destroyed</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="linksSection" class="links-section reveal">
+            <h1>Links & Resources</h1>
+            <ul>
+                <li><a href="https://alqassam.ps/">The hero of the resistance</a></li>
+                <li><a href="../Exo1/Lab_Exo1.html">Palestine ID Card</a></li>
+                <li><a href="https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death"
+                        target="_blank">WHO Global Health Data</a></li>
+                <li><a href="../Exo1/Lab_Exo1.html#history-section">History of Palestine</a></li>
+            </ul>
+        </div>
+
+        <div id="solidaritySection" class="solidarity-wrapper reveal">
+            <div class="watermelon-icon">🍉</div>
+            <div class="solidarity-text">
+                <span class="s-red">FREE</span> <span class="s-green">PALESTINE</span>
+                <span class="s-white">FROM THE RIVER</span>
+                <span class="s-black">TO THE SEA !</span>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="#top" class="go-top">Back to top</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; Gaza Genocide 2026, all rights reserved
+    </footer>
+
+    <script>
+        const statsContent = `Since <b>October 2023</b>, Gaza has endured continuous <b>bombardment</b>, <b>siege</b>, and <b>displacement</b>, leading to <b>catastrophic humanitarian conditions</b>. The <b>destruction</b> of <b>homes, hospitals, schools, and infrastructure</b> has left the population in <b>crisis</b>. Independent surveys estimate that over <b>80,000 people</b> may have died when including those <b>unconfirmed or missing</b>.<br><br>The classification of martyrs reflects the <b>indiscriminate nature</b> of the attacks: <b>nearly one‑third are children</b>, highlighting the <b>devastating impact</b> on <b>families and future generations</b>. <b>Women and the elderly</b> also make up significant portions, while men—often the majority of the population—represent <b>nearly half of the casualties</b>.`;
+
+        function startTypewriter(elementId, cursorId, text) {
+            const container = document.getElementById(elementId);
+            const cursor = document.getElementById(cursorId);
+            let index = 0;
+            let currentHTML = "";
+
+            function type() {
+                if (index < text.length) {
+                    if (text.charAt(index) === '<') {
+                        const tagEnd = text.indexOf('>', index);
+                        if (tagEnd !== -1) {
+                            currentHTML += text.substring(index, tagEnd + 1);
+                            index = tagEnd + 1;
+                            container.innerHTML = currentHTML;
+                            type();
+                            return;
+                        }
+                    }
+                    currentHTML += text.charAt(index);
+                    container.innerHTML = currentHTML;
+                    index++;
+                    setTimeout(type, Math.random() * 20 + 10);
+                } else {
+                    cursor.style.display = 'none';
+                }
+            }
+            type();
+        }
+
+        function animateCharts() {
+            const max = 171222;
+            const bars = [
+                { id: 'bar-injured', val: 171222, countId: 'count-injured' },
+                { id: 'bar-martyrs', val: 71267, countId: 'count-martyrs' },
+                { id: 'bar-missing', val: 9500, countId: 'count-missing' }
+            ];
+
+            bars.forEach(bar => {
+                const el = document.getElementById(bar.id);
+                const countEl = document.getElementById(bar.countId);
+                el.style.height = (bar.val / max * 100) + '%';
+                countEl.style.opacity = '1';
+            });
+        }
+
+        function animateCurve() {
+            const path = document.getElementById('curvePath');
+            const area = document.getElementById('curveArea');
+            const points = ['point1', 'point2', 'point3'];
+
+            // Start line animation
+            path.style.strokeDashoffset = '0';
+
+            // Fade in area
+            area.style.opacity = '0.2';
+
+            // Show points sequentially
+            points.forEach((pid, i) => {
+                setTimeout(() => {
+                    document.getElementById(pid).style.opacity = '1';
+                }, 1000 + (i * 800));
+            });
+        }
+
+        function startRevealObserver() {
+            const observerOptions = {
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+
+                        // Trigger specific sub-animations
+                        if (entry.target.id === 'statsSection') {
+                            setTimeout(() => {
+                                startTypewriter('typewriterContainer', 'typewriterCursor', statsContent);
+                            }, 300);
+                        }
+                        if (entry.target.id === 'chartsSection') {
+                            setTimeout(() => {
+                                animateCharts();
+                            }, 500);
+                        }
+                        if (entry.target.id === 'infraSection') {
+                            setTimeout(() => {
+                                animateCurve();
+                            }, 600);
+                        }
+
+                        // Unobserve once triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function startNavObserver() {
+            const navLinks = document.querySelectorAll('.hero-nav a');
+            const sections = [
+                document.getElementById('hero'),
+                document.getElementById('awarenessSection'),
+                document.getElementById('healthcareSection'),
+                document.getElementById('educationSection'),
+                document.getElementById('infraSection'),
+                document.getElementById('linksSection'),
+                document.getElementById('solidaritySection')
+            ];
+
+            // 1. Instant Active Class on Click
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    // We let smooth scroll handle the movement
+                });
+            });
+
+            // 2. Scroll Tracking via Intersection Observer
+            const observerOptions = {
+                root: null,
+                threshold: 0.1, // Trigger earlier
+                rootMargin: "-20% 0px -60% 0px" // Focus on the middle-upper part of the screen
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        // Update active class based on section visibility
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(s => {
+                if (s) observer.observe(s);
+            });
+        }
+
+        window.onload = () => {
+            startRevealObserver();
+            startNavObserver();
+        };
+    </script>
 </body>
+
+</html>
