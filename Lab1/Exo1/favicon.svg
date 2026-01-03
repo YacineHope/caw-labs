@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#f2e6d8"/>
+      <stop offset="1" stop-color="#d9c3a6"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="8" width="44" height="48" rx="4" fill="url(#g)" stroke="#8b5a2b" stroke-width="2"/>
+  <rect x="38" y="8" width="12" height="12" rx="2" fill="#8b5a2b"/>
+  <path d="M14 22h28v4H14z" fill="#8b5a2b" opacity="0.85"/>
+  <text x="20" y="44" font-family="Georgia, serif" font-size="16" fill="#5d4037" font-weight="700">ID</text>
+</svg>

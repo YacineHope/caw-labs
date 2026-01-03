@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Palestinian flag with olive branch logo">
+  <!-- Circular clip and border -->
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="64" cy="64" r="60" />
+    </clipPath>
+  </defs>
+
+  <!-- Outer ring -->
+  <circle cx="64" cy="64" r="62" fill="#fff" />
+  <circle cx="64" cy="64" r="60" fill="#000000" />
+
+  <!-- Flag inside clipped circle -->
+  <g clip-path="url(#circleClip)">
+    <!-- Background (three horizontal stripes) -->
+    <rect x="4" y="4" width="120" height="40" fill="#000" />
+    <rect x="4" y="44" width="120" height="40" fill="#fff" />
+    <rect x="4" y="84" width="120" height="40" fill="#007a3d" />
+
+    <!-- Red triangle at hoist -->
+    <polygon points="4,4 52,64 4,124" fill="#EE2A35" />
+  </g>
+
+  <!-- Olive branch (centered, stylized) -->
+  <g transform="translate(64,64) scale(0.9)">
+    <!-- main stem -->
+    <path d="M -6 20 C 0 6, 18 -4, 34 -28" fill="none" stroke="#2E8B57" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- leaves (right side) -->
+    <g fill="#2E8B57" stroke="#1f5f3f" stroke-width="0.6" stroke-linecap="round">
+      <ellipse cx="6" cy="2" rx="6" ry="3.2" transform="rotate(25 6 2)"/>
+      <ellipse cx="14" cy="-6" rx="6" ry="3.2" transform="rotate(12 14 -6)"/>
+      <ellipse cx="22" cy="-14" rx="6" ry="3.2" transform="rotate(-2 22 -14)"/>
+      <ellipse cx="30" cy="-22" rx="6" ry="3.2" transform="rotate(-18 30 -22)"/>
+    </g>
+    <!-- leaves (left side) -->
+    <g fill="#2E8B57" stroke="#1f5f3f" stroke-width="0.6" stroke-linecap="round">
+      <ellipse cx="-2" cy="10" rx="6" ry="3.2" transform="rotate(-25 -2 10)"/>
+      <ellipse cx="4" cy="4" rx="6" ry="3.2" transform="rotate(-8 4 4)"/>
+    </g>
+
+    <!-- small stem accent -->
+    <path d="M -10 14 C -6 10, -2 8, 0 6" fill="none" stroke="#2E8B57" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Thin white inner border to separate flag and ring -->
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+</svg>
