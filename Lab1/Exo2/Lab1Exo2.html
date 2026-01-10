@@ -489,6 +489,63 @@
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
         }
 
+        /* Famine Section Styles */
+        .famine-section {
+            margin: 40px 0;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .famine-list {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .famine-desc {
+            flex: 1;
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Make video column narrower */
+        .famine-video {
+            flex: 0 0 360px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .famine-video video {
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        @media (max-width: 768px) {
+            .famine-list {
+                flex-direction: column;
+            }
+
+            .famine-video {
+                flex: 1 1 auto;
+            }
+
+            .famine-video video {
+                max-width: 100%;
+                height: auto;
+                aspect-ratio: 16/9;
+            }
+        }
+
         .curve-svg {
             width: 100%;
             height: 250px;
@@ -1082,6 +1139,29 @@
             </div>
         </div>
 
+        <!-- Famine Section: placed between Infrastructure and Links -->
+        <div id="famineSection" class="famine-section reveal">
+            <ul class="famine-list">
+                <li class="famine-desc">
+                    <h2>Famine in Gaza</h2>
+                    <p>
+                        Gaza is facing a severe food crisis. Prolonged siege, large-scale displacement, destroyed
+                        agricultural infrastructure, and restricted humanitarian access have drastically reduced
+                        food availability and pushed many families toward acute food insecurity. Malnutrition is
+                        rising among children and vulnerable groups, while medical and logistical shortages make
+                        relief efforts extremely difficult. International organizations warn that without sustained
+                        humanitarian corridors and restoration of basic services, the crisis will deepen.
+                    </p>
+                </li>
+                <li class="famine-video">
+                    <video controls preload="metadata" playsinline>
+                        <source src="GazaFamine.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </li>
+            </ul>
+        </div>
+
         <div id="linksSection" class="links-section reveal">
             <h1>Links & Resources</h1>
             <ul>
@@ -1089,7 +1169,8 @@
                 <li><a href="../Exo1/Lab_Exo1.html">Palestine ID Card</a></li>
                 <li><a href="https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death"
                         target="_blank">WHO Global Health Data</a></li>
-                <li><a href="../Exo1/Lab_Exo1.html#history-section" target="_blank" rel="noopener noreferrer">History Of Palestine</a></li>
+                <li><a href="../Exo1/Lab_Exo1.html#history-section" target="_blank" rel="noopener noreferrer">History Of
+                        Palestine</a></li>
             </ul>
         </div>
 
